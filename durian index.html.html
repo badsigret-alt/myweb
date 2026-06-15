@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ทองคำแห่งสวน | ทุเรียนเกรดพรีเมียมคัดพิเศษส่งตรงจากสวน</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --durian-green: #1e5128;
+            --durian-green-light: #4e8252;
+            --durian-gold: #d8b257;
+            --durian-soft-gold: #fdfaf2;
+            --text-dark: #191a19;
+        }
+
+        /* 1. LUXURY ANIMATED BACKGROUND SYSTEM (ระบบพื้นหลังเคลื่อนไหวหรูหรา) */
+        body {
+            font-family: 'Prompt', sans-serif;
+            color: var(--text-dark);
+            /* พื้นหลังไล่เฉดสีธรรมชาติ ขยับแบบ Ambient */
+            background: linear-gradient(-45deg, #f4f7f4, #fffef9, #fbf7eb, #f5fafd);
+            background-size: 400% 400%;
+            animation: premiumGradient 18s ease infinite;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        @keyframes premiumGradient {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        /* ลูกเล่นวงแสงออร่าเบลอขยับได้ด้านหลัง */
+        body::before,
+        body::after {
+            content: '';
+            position: fixed;
+            width: 500px;
+            height: 500px;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: -2;
+            filter: blur(140px);
+            opacity: 0.35;
+        }
+
+        body::before {
+            top: -10%;
+            right: -5%;
+            background: var(--durian-gold);
+            animation: floatOrb 10s ease-in-out infinite alternate;
+        }
+
+        body::after {
+            bottom: -5%;
+            left: -10%;
+            background: var(--durian-green-light);
+            animation: floatOrb 14s ease-in-out infinite alternate-reverse;
+        }
+
+        @keyframes floatOrb {
+            0% {
+                transform: translateY(0px) scale(1);
+            }
+
+            100% {
+                transform: translateY(50px) scale(1.15);
+            }
+        }
+
+        /* 2. GLASSMORPHISM COMPONENTS (การ์ดสไตล์กระจกฝ้าหรูหรา) */
+        .navbar,
+        .glass-card,
+        .accordion-item {
+            background: rgba(255, 255, 255, 0.75) !important;
+            backdrop-filter: blur(15px) !important;
+            -webkit-backdrop-filter: blur(15px) !important;
+            border: 1px solid rgba(255, 255, 255, 0.6) !important;
+        }
+
+        /* 3. DESIGN ELEMENTS & BUTTONS */
+        .text-durian-green {
+            color: var(--durian-green);
+        }
+
+        .text-durian-gold {
+            color: var(--durian-gold);
+        }
+
+        .btn-durian-primary {
+            background: linear-gradient(135deg, var(--durian-green), #2c6e39);
+            color: white;
+            font-weight: 600;
+            border-radius: 50px;
+            padding: 12px 30px;
+            border: none;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        .btn-durian-primary:hover {
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(30, 81, 40, 0.3);
+        }
+
+        .btn-durian-outline {
+            border: 2px solid var(--durian-green);
+            color: var(--durian-green);
+            font-weight: 600;
+            border-radius: 50px;
+            padding: 10px 26px;
+            background: transparent;
+            transition: all 0.3s ease;
+        }
+
+        .btn-durian-outline:hover {
+            background-color: var(--durian-green);
+            color: white;
+        }
+
+        /* Hero Image Container */
+        .hero-img-wrapper {
+            position: relative;
+        }
+
+        .hero-img-wrapper img {
+            border-radius: 24px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+            object-fit: cover;
+        }
+
+        /* Variety Product Cards */
+        .variety-card {
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            background: white;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .variety-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .variety-img-box {
+            position: relative;
+            height: 280px;
+            overflow: hidden;
+        }
+
+        .variety-img-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .variety-card:hover .variety-img-box img {
+            transform: scale(1.06);
+        }
+
+        .variety-badge {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: rgba(30, 81, 40, 0.9);
+            color: white;
+            padding: 6px 16px;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            backdrop-filter: blur(5px);
+        }
+
+        /* Meter System */
+        .meter-bar-wrapper {
+            background-color: rgba(0, 0, 0, 0.08);
+            height: 10px;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .meter-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--durian-gold), #ecd49a);
+            width: 0%;
+            transition: width 0.8s ease-in-out;
+        }
+
+        /* Accordion Custom */
+        .accordion-button:not(.collapsed) {
+            background-color: var(--durian-soft-gold);
+            color: var(--durian-green);
+            font-weight: 600;
+        }
+
+        .accordion-button:focus {
+            box-shadow: 0 0 0 0.25rem rgba(30, 81, 40, 0.15);
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-light sticky-top shadow-sm">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center fw-bold text-durian-green fs-4" href="#">
+                <i class="fa-solid fa-leaf me-2 text-durian-gold"></i> ทองคำแห่งสวน
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto me-4 gap-2">
+                    <li class="nav-item"><a class="nav-link" href="#">หน้าแรก</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#varieties">สายพันธุ์ยอดนิยม</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#ripeness">คู่มือความสุก</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#order">คำนวณราคา & สั่งซื้อ</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#faq">คำถามพบบ่อย</a></li>
+                </ul>
+                <a href="#order" class="btn btn-durian-primary shadow-sm"><i
+                        class="fa-solid fa-cart-shopping me-2"></i>สั่งซื้อออนไลน์</a>
+            </div>
+        </div>
+    </nav>
+
+    <header class="py-5 my-md-4">
+        <div class="container">
+            <div class="row align-items-center g-5">
+                <div class="col-lg-6">
+                    <span
+                        class="badge bg-success-subtle text-success border border-success-subtle px-3 py-2 rounded-pill fw-bold mb-3">
+                        <i class="fa-solid fa-crown text-durian-gold me-1"></i> Premium Export Grade คัดเนื้อ 100%
+                    </span>
+                    <h1 class="display-4 fw-black text-durian-green fw-bold lh-sm mb-3">
+                        ทองคำแห่งสวน <br>รสชาติของทุเรียน<br><span
+                            class="text-durian-gold">เกรดพรีเมียม</span>ที่แท้จริง
+                    </h1>
+                    <p class="lead text-muted mb-4 fs-5">
+                        สัมผัสรสชาติอันเย้ายวนใจของราชาผลไม้ไทย ทุเรียนที่ได้รับการดูแลอย่างประณีตในสวนระบบปิด
+                        คัดสรรเฉพาะทุเรียนที่มีเปอร์เซ็นต์แป้งสูง รสชาติหวานมันกลมกล่อม กลิ่นหอมละมุนไม่ฉุนจัด
+                    </p>
+                    <div class="d-flex flex-wrap gap-3">
+                        <a href="#order" class="btn btn-durian-primary btn-lg px-4 shadow">เลือกสายพันธุ์และสั่งซื้อ <i
+                                class="fa-solid fa-chevron-right ms-2 fs-6"></i></a>
+                        <a href="#varieties" class="btn btn-durian-outline btn-lg px-4">ดูรีวิวแต่ละพันธุ์</a>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="hero-img-wrapper text-center">
+                        <img src="durian_hero.png" alt="ทุเรียนพรีเมียม ทองคำแห่งสวน" class="img-fluid w-100">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="container my-5 py-3">
+
+        <section id="varieties" class="mb-5 pb-5">
+            <div class="text-center max-w-2xl mx-auto mb-5">
+                <h2 class="fw-bold text-durian-green display-6">👑 เจาะลึกสายพันธุ์ทุเรียนคัดพิเศษ</h2>
+                <p class="text-muted fs-5">เราคัดเนื้อล้วนเฉพาะพูที่สมบูรณ์ที่สุด
+                    มาดูกันว่าสายพันธุ์ไหนตอบโจทย์ความอร่อยของคุณมากที่สุด</p>
+            </div>
+
+            <div class="row g-4">
+                <div class="col-lg-4 col-md-6">
+                    <div class="card h-100 variety-card">
+                        <div class="variety-img-box">
+                            <span class="variety-badge">🔥 ขายดีที่สุด</span>
+                            <img src="durian_monthong.png" alt="ทุเรียนหมอนทอง">
+                        </div>
+                        <div class="card-body p-4 d-flex flex-column justify-content-between">
+                            <div>
+                                <h3 class="fw-bold text-durian-green h4 mb-2">ทุเรียนพันธุ์หมอนทอง</h3>
+                                <p class="text-muted small mb-3">ราชาแห่งความคุ้มค่า เนื้อหนาแน่นสะใจ</p>
+                                <p class="card-text text-secondary mb-4">
+                                    <strong>อันนี้ดียังไง? :</strong> เหมาะสำหรับคนที่ชอบ <strong>เนื้อทุเรียนหนาละเอียด
+                                        เมล็ดลีบเล็กจิ๋ว และรสชาติหวานละมุนมันนัว</strong> กลิ่นไม่ฉุนจัด
+                                    ยิ่งทานแบบกรอบนอกนุ่มในจะฟินมาก กินได้เรื่อยๆ ไม่เลี่ยน
+                                </p>
+                            </div>
+                            <div class="border-top pt-3 bg-light-subtle rounded p-2">
+                                <span class="d-block text-durian-green fw-bold small mb-1"><i
+                                        class="fa-solid fa-thumbs-up me-1 text-warning"></i> เหมาะสำหรับ:</span>
+                                <small class="text-muted">ผู้ที่ชอบทุเรียนเนื้อเยอะเต็มๆ คำ
+                                    รสชาติหวานมันกลมกล่อมมาตรฐานสากล</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6">
+                    <div class="card h-100 variety-card">
+                        <div class="variety-img-box">
+                            <span class="variety-badge" style="background:#8b6208">💎 ระดับท็อปคลาส</span>
+                            <img src="durian_kanyao.png" alt="ทุเรียนก้านยาว">
+                        </div>
+                        <div class="card-body p-4 d-flex flex-column justify-content-between">
+                            <div>
+                                <h3 class="fw-bold text-durian-green h4 mb-2">ทุเรียนพันธุ์ก้านยาว</h3>
+                                <p class="text-muted small mb-3">ที่สุดแห่งความครีมมี่ ละมุนระดับลักชูรี</p>
+                                <p class="card-text text-secondary mb-4">
+                                    <strong>อันนี้ดียังไง? :</strong> ขึ้นชื่อว่าเป็นทุเรียนที่แพงและพรีเมียมที่สุด
+                                    จุดเด่นคือ <strong>เนื้อเนียนละเอียดเหนียวนุ่มเหมือนครีมคัสตาร์ด
+                                        รสชาติหวานมันเข้มข้นกลมกล่อมล้ำลึก</strong> เนื้อไม่เป็นเส้นใยเลย
+                                    แม้จะสุกนิ่มเนื้อก็ไม่แฉะน้ำ
+                                </p>
+                            </div>
+                            <div class="border-top pt-3 bg-light-subtle rounded p-2">
+                                <span class="d-block text-durian-green fw-bold small mb-1"><i
+                                        class="fa-solid fa-star me-1 text-warning"></i> เหมาะสำหรับ:</span>
+                                <small class="text-muted">สายกินระดับแฟนนัททิค
+                                    หรือซื้อเป็นของขวัญผู้ใหญ่ชิ้นพิเศษที่ต้องการความหรูหรา</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-12">
+                    <div class="card h-100 variety-card">
+                        <div class="variety-img-box">
+                            <span class="variety-badge" style="background:#c1450a">🌟 สายรสจัดจ้าน</span>
+                            <img src="durian_chanee.png" alt="ทุเรียนชะนีไข่">
+                        </div>
+                        <div class="card-body p-4 d-flex flex-column justify-content-between">
+                            <div>
+                                <h3 class="fw-bold text-durian-green h4 mb-2">ทุเรียนพันธุ์ชะนีไข่</h3>
+                                <p class="text-muted small mb-3">สีเหลืองทองเข้มจัด รสจัดจ้านชัดเจน</p>
+                                <p class="card-text text-secondary mb-4">
+                                    <strong>อันนี้ดียังไง? :</strong> เด่นที่สุดเรื่อง
+                                    <strong>สีเนื้อเหลวงทองเข้มจัดสวยงาม และรสชาติที่หวานแหลมมันเข้มข้นสะใจ</strong>
+                                    กลิ่นทุเรียนหอมแรงชัดเจนอันเป็นเอกลักษณ์ เนื้อเหนียวหนึบ
+                                    เหมาะมากสำหรับคนชอบทุเรียนรสแท้ดั้งเดิม
+                                </p>
+                            </div>
+                            <div class="border-top pt-3 bg-light-subtle rounded p-2">
+                                <span class="d-block text-durian-green fw-bold small mb-1"><i
+                                        class="fa-solid fa-fire me-1 text-warning"></i> เหมาะสำหรับ:</span>
+                                <small class="text-muted">คอทุเรียนพันธุ์แท้ที่ชอบรสชาติจัดจ้าน กลิ่นชัด
+                                    และนิยมนำไปทำน้ำกะทิทุเรียน/ขนมไทย</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="ripeness" class="mb-5 pb-5">
+            <div class="glass-card rounded-4 p-4 p-lg-5 shadow-sm">
+                <div class="row align-items-center mb-4">
+                    <div class="col-lg-6">
+                        <h2 class="fw-bold text-durian-green mb-2"><i
+                                class="fa-solid fa-sliders text-durian-gold me-2"></i>📊 คู่มือเลือกระดับความสุกของเนื้อ
+                        </h2>
+                        <p class="text-muted mb-0">
+                            คลิกเลือกระดับความสุกด้านล่างเพื่อส่องดูเปอร์เซ็นต์โครงสร้างความอร่อยที่คุณชอบ</p>
+                    </div>
+                    <div class="col-lg-6 text-lg-end mt-3 mt-lg-0">
+                        <div class="btn-group" role="group">
+                            <button type="button" class="btn btn-outline-secondary ripeness-btn active"
+                                data-ripeness="crispy">กรอบนอกนุ่มใน</button>
+                            <button type="button" class="btn btn-outline-secondary ripeness-btn"
+                                data-ripeness="creamy">สุกพอดี (ครีมมี่)</button>
+                            <button type="button" class="btn btn-outline-secondary ripeness-btn"
+                                data-ripeness="soft">เนื้อล้วนสุกนิ่ม</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="p-4 rounded-3 bg-white bg-opacity-50 border-start border-4 border-warning shadow-inner">
+                    <h3 id="ripenessTitle" class="fw-bold text-durian-green">กรอบนอกนุ่มใน</h3>
+                    <p id="ripenessDesc" class="text-muted my-3"></p>
+
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <div class="d-flex justify-content-between mb-1 fw-semibold">
+                                <span>ระดับความกรอบ (Crunchiness)</span>
+                                <span id="crunchValue" class="text-durian-green fw-bold">0%</span>
+                            </div>
+                            <div class="meter-bar-wrapper mb-3">
+                                <div id="crunchBar" class="meter-bar"></div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="d-flex justify-content-between mb-1 fw-semibold">
+                                <span>ระดับความละมุน (Creaminess)</span>
+                                <span id="creamValue" class="text-durian-gold fw-bold">0%</span>
+                            </div>
+                            <div class="meter-bar-wrapper mb-3">
+                                <div id="creamBar" class="meter-bar"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-3 p-3 bg-white rounded border border-light-subtle">
+                        <p class="mb-0 fs-6">
+                            <i class="fa-solid fa-lightbulb text-warning me-2"></i><strong>คำแนะนำการทาน:</strong>
+                            <span id="ripenessRecommend" class="text-secondary">-</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="order" class="mb-5 pb-5">
+            <div class="text-center mb-5">
+                <h2 class="fw-bold text-durian-green display-6">🛒 คำนวณราคา & สั่งซื้อแบบจำลอง</h2>
+                <p class="text-muted">ระบุสายพันธุ์และน้ำหนักเพื่อเช็คใบเสร็จสรุปยอดเงินได้ทันที</p>
+            </div>
+
+            <div class="glass-card rounded-4 p-4 p-lg-5 shadow-sm">
+                <form id="durianCalculatorForm" onsubmit="handleOrderSubmit(event)">
+                    <div class="row g-4">
+
+                        <div class="col-lg-7">
+                            <h4 class="fw-bold text-durian-green mb-4 border-bottom pb-2"><i
+                                    class="fa-solid fa-pen-to-square me-2"></i>เลือกรายการสินค้า</h4>
+
+                            <div class="mb-4">
+                                <label for="variety" class="form-label fw-bold">1. เลือกสายพันธุ์ทุเรียนแกะพู</label>
+                                <select id="variety" class="form-select form-select-lg" onchange="calculatePrice()">
+                                    <option value="หมอนทอง" data-price="250" selected>หมอนทอง พรีเมียม (250 บาท / กก.)
+                                    </option>
+                                    <option value="ก้านยาว" data-price="450">ก้านยาว ลับแล (450 บาท / กก.)</option>
+                                    <option value="ชะนีไข่" data-price="180">ชะนีไข่ เกาะช้าง (180 บาท / กก.)</option>
+                                </select>
+                            </div>
+
+                            <div class="mb-4">
+                                <label for="weight" class="form-label fw-bold">2. น้ำหนักเนื้อล้วน (กิโลกรัม)</label>
+                                <div class="input-group input-group-lg">
+                                    <span class="input-group-text"><i
+                                            class="fa-solid fa-scale-balanced text-secondary"></i></span>
+                                    <input type="number" id="weight" class="form-control" value="1" min="1"
+                                        oninput="calculatePrice()">
+                                    <span class="input-group-text fw-medium">กก. (Kg)</span>
+                                </div>
+                            </div>
+
+                            <div class="mb-4">
+                                <label class="form-label fw-bold mb-2">3. เลือกระดับความสุกที่จัดส่ง</label>
+                                <div class="d-flex flex-wrap gap-2">
+                                    <button type="button"
+                                        class="btn btn-outline-secondary pill-option active px-4 rounded-pill"
+                                        data-val="กรอบนอกนุ่มใน">กรอบนอกนุ่มใน</button>
+                                    <button type="button"
+                                        class="btn btn-outline-secondary pill-option px-4 rounded-pill"
+                                        data-val="สุกพอดี">สุกพอดี (ครีมมี่)</button>
+                                    <button type="button"
+                                        class="btn btn-outline-secondary pill-option px-4 rounded-pill"
+                                        data-val="เนื้อสุกนิ่ม">เนื้อสุกนิ่ม</button>
+                                </div>
+                                <input type="hidden" id="selectedRipeness" value="กรอบนอกนุ่มใน">
+                            </div>
+
+                            <div class="form-check form-switch mt-4 p-3 bg-white bg-opacity-50 rounded border">
+                                <input class="form-check-input ms-0 me-3" type="checkbox" id="premiumBox"
+                                    style="transform: scale(1.3); cursor: pointer;" onchange="calculatePrice()">
+                                <label class="form-check-input-label fw-bold text-durian-green" for="premiumBox"
+                                    style="cursor: pointer;">
+                                    📦 อัปเกรดบรรจุภัณฑ์เป็นกล่องไม้ Luxury สำหรับเซ็ตของขวัญ (+350 บาท)
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-5">
+                            <div class="p-4 h-100 d-flex flex-column justify-content-between rounded-3"
+                                style="border: 2px dashed var(--durian-gold); background-color: rgba(253, 250, 242, 0.6);">
+                                <div>
+                                    <h4 class="fw-bold text-center text-durian-green mb-4">ใบสรุปรายละเอียดบิล</h4>
+
+                                    <div class="d-flex justify-content-between mb-3 border-bottom pb-2">
+                                        <span class="text-secondary">ค่าเนื้อทุเรียนพรีเมียม:</span>
+                                        <span id="sumDurianPrice" class="fw-bold text-durian-green">0 บาท</span>
+                                    </div>
+
+                                    <div class="d-flex justify-content-between mb-3 border-bottom pb-2">
+                                        <span class="text-secondary">ค่ากล่องไม้เซ็ตของขวัญ:</span>
+                                        <span id="sumBoxPrice" class="fw-bold text-durian-green">0 บาท</span>
+                                    </div>
+
+                                    <div class="d-flex justify-content-between mb-3 border-bottom pb-2">
+                                        <span class="text-secondary">การจัดส่งด่วนแบบแช่เย็น:</span>
+                                        <span class="fw-semibold text-success"><i
+                                                class="fa-solid fa-snowflake me-1"></i> ส่งฟรีทั่วประเทศ</span>
+                                    </div>
+                                </div>
+
+                                <div class="mt-4">
+                                    <div
+                                        class="d-flex justify-content-between align-items-center mb-4 bg-white p-3 rounded shadow-sm">
+                                        <span class="h5 mb-0 fw-bold text-durian-green">รวมเงินทั้งสิ้น:</span>
+                                        <span id="sumTotalPrice" class="h3 mb-0 text-durian-green fw-bold">0 บาท</span>
+                                    </div>
+                                    <button type="submit" class="btn btn-durian-primary btn-lg w-100 py-3 shadow"><i
+                                            class="fa-solid fa-circle-check me-2"></i>ยืนยันส่งข้อมูลจำลอง</button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </form>
+            </div>
+        </section>
+
+        <section id="faq" class="mb-5">
+            <div class="text-center mb-5">
+                <h2 class="fw-bold text-durian-green">💡 คำถามที่พบบ่อย (FAQ)</h2>
+                <p class="text-muted">คลายข้อสงสัยเกี่ยวกับระบบรับประกันเนื้อและบริการส่งตรงจากสวน</p>
+            </div>
+
+            <div class="row justify-content-center">
+                <div class="col-lg-9">
+                    <div class="accordion" id="faqAccordion">
+                        <div class="accordion-item rounded-3 mb-3 overflow-hidden">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed py-3" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#faq1">
+                                    ❓ มีการรับประกันเนื้อทุเรียนให้ไหม?
+                                </button>
+                            </h2>
+                            <div id="faq1" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body text-secondary bg-white">
+                                    มีแน่นอนครับ! หากเนื้อทุเรียนที่ส่งไป อ่อน แฉะ เป็นน้ำ
+                                    หรือไม่ตรงใจตามระดับความสุกที่คุณเลือกไว้
+                                    สามารถถ่ายรูป/วิดีโอเพื่อส่งเคลมพูใหม่ได้ฟรีภายใน 24 ชั่วโมงหลังจากได้รับสินค้าครับ
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item rounded-3 mb-3 overflow-hidden">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed py-3" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#faq2">
+                                    ❓ ระบบขนส่งแบบไหน และสินค้าจะเสียหายไหม?
+                                </button>
+                            </h2>
+                            <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body text-secondary bg-white">
+                                    เราจัดส่งด้วยรถขนส่งควบคุมอุณหภูมิความเย็น (Cold Chain)
+                                    บรรจุในถุงซีลล็อกระบบสุญญากาศอย่างดีเพื่อป้องกันกลิ่นออก 100% รักษาความสด กรอบ อร่อย
+                                    เหมือนพึ่งแกะจากปลงที่สวนจนถึงมือคุณครับ
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-dark text-white py-4 mt-5 border-top border-warning border-3">
+        <div class="container text-center">
+            <p class="mb-1 fw-medium text-durian-gold"><i class="fa-solid fa-leaf me-2"></i>ทองคำแห่งสวน - Premium
+                Durian Delivery Business</p>
+            <small class="opacity-50">© 2026 หน้าต่างจำลองเว็บไซต์ธุรกิจจริง.
+                รูปภาพลิขสิทธิ์ถูกต้องตามไฟล์แนบของผู้ใช้งาน</small>
+        </div>
+    </footer>
+
+    <div class="modal fade" id="orderSuccessModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content border-0 shadow-lg rounded-4">
+                <div class="modal-header bg-success text-white border-0 py-3">
+                    <h5 class="modal-title fw-bold"><i class="fa-solid fa-circle-check text-white me-2"></i>
+                        บันทึกคำสั่งซื้อจำลองสำเร็จ!</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"
+                        onclick="closeModal()"></button>
+                </div>
+                <div class="modal-body p-4">
+                    <p id="modalDescription" class="fs-6 text-dark mb-0 text-start"></p>
+                </div>
+                <div class="modal-footer border-0 justify-content-center pb-4">
+                    <button type="button" class="btn btn-durian-primary px-5" data-bs-dismiss="modal"
+                        onclick="closeModal()">ปิดหน้าต่างนี้</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        const ripenessData = {
+            'crispy': {
+                title: 'กรอบนอกนุ่มใน (Crispy & Soft Inside)',
+                desc: 'เนื้อผิวด้านนอกมีความตึงกรอบเคี้ยวสนุก แต่เนื้อในนุ่มนวลกำลังดี รสชาติหวานมันเด่นชัด ไม่เละและไม่ติดมือ',
+                crunch: 75,
+                cream: 45,
+                recommend: 'เหมาะสำหรับผู้ที่ชอบสัมผัสการเคี้ยวที่สนุกสนาน เนื้อสัมผัสอยู่ตัวดีเยี่ยม เหมาะสำหรับเป็นของฝากปลายทางไกล'
+            },
+            'creamy': {
+                title: 'สุกพอดี (Creamy Texture)',
+                desc: 'เนื้อสัมผัสเหนียวเนียนนุ่มละเอียดละลายในลิ้น กลิ่นหอมทุเรียนชัดเจนกระจายทั่วพู รสหวานมันเข้มข้นถึงขีดสุด',
+                crunch: 20,
+                cream: 90,
+                recommend: 'แนะนำให้รับประทานทันทีในวันที่ได้รับของ เพื่อสัมผัสรสชาติอันสมบูรณ์แบบที่สุดของทุเรียนพรีเมียม'
+            },
+            'soft': {
+                title: 'เนื้อสุกนิ่ม (Soft & Deep Sweet)',
+                desc: 'เนื้อสุกงอมเต็มที่ นิ่มเหลวละมุนไร้ใย กลิ่นทุเรียนโชว์พลังเต็มพิกัด รสชาติหวานฉ่ำลึกสุดๆ',
+                crunch: 5,
+                cream: 98,
+                recommend: 'เหมาะสำหรับกลุ่มผู้ใหญ่ที่ชอบเนื้อเคี้ยวง่าย หรือผู้ชื่นชอบรสหวานจัด และสามารถนำไปทำไอศกรีมหรือข้าวเหนียวน้ำกะทิต่อได้ดี'
+            }
+        };
+
+        const ripenessButtons = document.querySelectorAll('.ripeness-btn');
+
+        function updateRipenessTab(type) {
+            const data = ripenessData[type];
+            if (!data) return;
+
+            document.getElementById('ripenessTitle').textContent = data.title;
+            document.getElementById('ripenessDesc').textContent = data.desc;
+
+            document.getElementById('crunchValue').textContent = data.crunch + "%";
+            document.getElementById('crunchBar').style.width = data.crunch + "%";
+
+            document.getElementById('creamValue').textContent = data.cream + "%";
+            document.getElementById('creamBar').style.width = data.cream + "%";
+
+            document.getElementById('ripenessRecommend').textContent = data.recommend;
+        }
+
+        ripenessButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                ripenessButtons.forEach(b => b.classList.remove('active', 'btn-dark'));
+                ripenessButtons.forEach(b => b.classList.add('btn-outline-secondary'));
+
+                btn.classList.add('active', 'btn-dark');
+                btn.classList.remove('btn-outline-secondary');
+
+                const type = btn.getAttribute('data-ripeness');
+                updateRipenessTab(type);
+            });
+        });
+
+        const pillOptions = document.querySelectorAll('.pill-option');
+        const hiddenRipenessInput = document.getElementById('selectedRipeness');
+
+        pillOptions.forEach(pill => {
+            pill.addEventListener('click', () => {
+                pillOptions.forEach(p => {
+                    p.classList.remove('active', 'btn-dark');
+                    p.classList.add('btn-outline-secondary');
+                });
+                pill.classList.add('active', 'btn-dark');
+                pill.classList.remove('btn-outline-secondary');
+                hiddenRipenessInput.value = pill.getAttribute('data-val');
+            });
+        });
+
+        function calculatePrice() {
+            const varietySelect = document.getElementById('variety');
+            const selectedOption = varietySelect.options[varietySelect.selectedIndex];
+            const pricePerKg = parseFloat(selectedOption.getAttribute('data-price'));
+
+            const weightInput = document.getElementById('weight');
+            let weight = parseFloat(weightInput.value);
+            if (isNaN(weight) || weight < 1) {
+                weight = 1;
+                weightInput.value = 1;
+            }
+
+            const basePrice = pricePerKg * weight;
+            document.getElementById('sumDurianPrice').textContent = basePrice.toLocaleString() + " บาท";
+
+            const premiumBoxChecked = document.getElementById('premiumBox').checked;
+            const boxPrice = premiumBoxChecked ? 350 : 0;
+            document.getElementById('sumBoxPrice').textContent = boxPrice.toLocaleString() + " บาท";
+
+            const totalPrice = basePrice + boxPrice;
+            document.getElementById('sumTotalPrice').textContent = totalPrice.toLocaleString() + " บาท";
+        }
+
+        let bootstrapModal;
+
+        function handleOrderSubmit(event) {
+            event.preventDefault();
+            const varietySelect = document.getElementById('variety');
+            const selectedVarietyText = varietySelect.options[varietySelect.selectedIndex].text;
+            const weight = document.getElementById('weight').value;
+            const ripeness = document.getElementById('selectedRipeness').value;
+            const totalPrice = document.getElementById('sumTotalPrice').textContent;
+            const premiumBoxChecked = document.getElementById('premiumBox').checked;
+            const boxText = premiumBoxChecked ? " (เซ็ตอัปเกรดกล่องไม้สุดหรู)" : "";
+
+            const descHtml = `ระบบจำลองทำการบันทึกข้อมูลเรียบร้อย!<br><br><strong>รายการสั่งซื้อ:</strong> ทุเรียนแกะพูสดสายพันธุ์ ${selectedVarietyText}<br><strong>น้ำหนัก:</strong> ${weight} กิโลกรัม<br><strong>ระดับความสุก:</strong> ${ripeness}${boxText}<br><strong>ยอดเงินรวมแช่เย็นฟรี:</strong> <span class="text-success fw-bold">${totalPrice}</span><br><br>ขอบคุณที่ร่วมทดสอบระบบหน้าร้านธุรกิจจริงครับ!`;
+
+            document.getElementById('modalDescription').innerHTML = descHtml;
+
+            bootstrapModal = new bootstrap.Modal(document.getElementById('orderSuccessModal'));
+            bootstrapModal.show();
+        }
+
+        function closeModal() {
+            document.getElementById('durianCalculatorForm').reset();
+            calculatePrice();
+            pillOptions.forEach((p, idx) => {
+                if (idx === 0) {
+                    p.classList.add('active', 'btn-dark');
+                    p.classList.remove('btn-outline-secondary');
+                    hiddenRipenessInput.value = p.getAttribute('data-val');
+                } else {
+                    p.classList.remove('active', 'btn-dark');
+                    p.classList.add('btn-outline-secondary');
+                }
+            });
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            updateRipenessTab('crispy');
+            calculatePrice();
+        });
+    </script>
+</body>
+
+</html>
